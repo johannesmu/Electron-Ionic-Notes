@@ -34,4 +34,11 @@ export class AuthenticationService {
         return null;
     }
   }
+  //sign in
+  signIn( email, password ){
+    this.afAuth.auth.signInWithEmailAndPassword( email, password )
+    .catch( (error) => {
+      //sign in error
+    });
+  }
 }
