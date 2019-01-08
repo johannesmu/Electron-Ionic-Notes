@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,15 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor( private router:Router){
+  //inject services into contstructor
+
+  constructor( private router:Router, authService: AuthenticationService ){
 
   }
   goToLogin(){
     this.router.navigate(['login']);
+  }
+  signUp(){
+
   }
 }
