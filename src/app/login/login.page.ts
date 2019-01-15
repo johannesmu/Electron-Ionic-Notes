@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
+import { Validators, FormBuilder, FormGroup} from '@angular/forms';
+import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +9,28 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  private email:string;
-  private password:string;
+  signInForm:FormGroup;
 
-  constructor( private authService:AuthenticationService ) { }
+  constructor( 
+    private authService:AuthenticationService,
+    private formBuilder:FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.signInForm = this.formBuilder.group({
+      email: ['',[ Validators.required, Validators.email ]],
+      password:['',[ Validators.required ]]
+    });
   }
-  signIn(){
-    this.authService.signIn(this.email,this.password);
+  signIn( formData ){
+    this.authService.signIn(formData.email, formData.password)
+    .then( (response) => {
+      //the user is signed in
+      console.log(response);
+    })
+    .catch( (error) =>{
+      //error signing in
+      console.log(error);
+    });
   }
 }
