@@ -53,6 +53,7 @@ export class AppComponent {
         }
         else{
           //user is not signed in
+          this.email = null;
         }
       }
     );

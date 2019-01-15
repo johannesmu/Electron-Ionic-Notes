@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthenticationService} from '../authentication.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signout',
@@ -11,7 +12,8 @@ export class SignoutPage implements OnInit {
 
   constructor( 
     private authService:AuthenticationService,
-    private router:Router 
+    private router:Router,
+    private toaster:ToastController
   ) { }
 
   ngOnInit() {
@@ -21,11 +23,21 @@ export class SignoutPage implements OnInit {
     .then( (response) => {
       if( response.success ){
         //navigate to home (signup)
-        this.router.navigate(['/home']);
+        this.showToast('You have been logged out')
+        .then(()=>{ 
+          this.router.navigate(['/home']);
+        });
       }
     })
     .catch( (error) => {
       //signout error
     });
+  }
+  async showToast(msg){
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 }
