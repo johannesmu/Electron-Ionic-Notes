@@ -49,4 +49,14 @@ export class AuthenticationService {
       return { success: false, error: error.message };
     }
   }
+
+  async signOut(){
+    try{
+      await this.afAuth.auth.signOut();
+      return {success: true};
+    }
+    catch(error){
+      return {success: false};
+    }
+  }
 }

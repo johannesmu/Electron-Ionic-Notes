@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-login',
