@@ -27,7 +27,8 @@ const routes: Routes = [
   { 
     path: 'signout', 
     loadChildren: './signout/signout.module#SignoutPageModule' 
-  },  { path: 'notes', loadChildren: './notes/notes.module#NotesPageModule' }
+  },  { path: 'notes', loadChildren: './notes/notes.module#NotesPageModule' },
+  { path: 'note-add', loadChildren: './note-add/note-add.module#NoteAddPageModule' }
 
 ];
 

@@ -54,6 +54,18 @@ export class AppComponent {
         else{
           //user is not signed in
           this.email = null;
+          this.appPages = [
+            {
+              title: 'Sign Up',
+              url: '/signup',
+              icon: 'person-add'
+            },
+            {
+              title: 'Sign In',
+              url: '/login',
+              icon: 'log-in'
+            }
+          ];
         }
       }
     );

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add a new note</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Note Title</ion-label>
+      <ion-input type="text" [(ngModel)]="title" placeholder="Note title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Note Content</ion-label>
+      <ion-textarea [(ngModel)]="content" rows="4" cols="20" placeholder="Note Content"></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" (click)="saveNote()">Save</ion-button>
+    <ion-button expand="block" (click)="close()">Cancel</ion-button>
+  </ion-list>
+</ion-content>
