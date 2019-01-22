@@ -13,6 +13,9 @@ export class AuthenticationService {
       console.log(userObj);
     });
   }
+  async getAuthState(){
+    await this.user;
+  }
   signUp(email,password){
     this.afAuth.auth.createUserWithEmailAndPassword(email,password)
     .catch( (error) => {
@@ -22,9 +25,6 @@ export class AuthenticationService {
     });
   }
   signIn(email,password){
-
-  }
-  signIpWithGoogle(){
 
   }
   handleSignUpError(error){
@@ -46,4 +46,5 @@ export class AuthenticationService {
         break;
     }
   }
+
 }
