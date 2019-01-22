@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +53,11 @@ export class AuthenticationService {
 
   async signOut(){
     try{
-      
+      await this.afAuth.auth.signOut();
+      return {success: true};
+    }
+    catch(error){
+      return {success: false};
     }
   }
 }

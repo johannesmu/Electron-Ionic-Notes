@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication.service';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
-import { ConsoleReporter } from 'jasmine';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,24 +14,41 @@ export class LoginPage implements OnInit {
 
   constructor( 
     private authService:AuthenticationService,
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private toaster:ToastController,
+    private router:Router
   ) { }
 
   ngOnInit() {
     this.signInForm = this.formBuilder.group({
       email: ['',[ Validators.required, Validators.email ]],
-      password:['',[ Validators.required ]]
+      password:['',[ Validators.required, Validators.minLength(6) ]]
     });
   }
   signIn( formData ){
     this.authService.signIn(formData.email, formData.password)
     .then( (response) => {
       //the user is signed in
-      console.log(response);
+      if(response.success){
+        //show toast
+        this.showToast('Welcome Back!')
+        .then( () => {
+          //take user to notes
+          this.router.navigate(['/notes']);
+        });
+      }
     })
     .catch( (error) =>{
       //error signing in
       console.log(error);
     });
+  }
+
+  async showToast(msg){
+    const toast = await this.toaster.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 }
