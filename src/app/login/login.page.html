@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      Sign In
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,20 +16,23 @@
           <h1>Sign In</h1>
         </ion-label>
       </ion-list-header>
+      <form [formGroup] = "signInForm" (submit)="signIn(signInForm.value)">
       <ion-item>
         <ion-label position="stacked">Email</ion-label>
-        <ion-input type="email" placeholder="you@domain.com"></ion-input>
+        <ion-input type="email" placeholder="you@domain.com" name="email" formControlName="email" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
-        <ion-input type="password" placeholder="minimum 6 characters"></ion-input>
+        <ion-input type="password" placeholder="minimum 6 characters" name="password" formControlName="password" ></ion-input>
       </ion-item>
       
-        <ion-button expand="block" class="signup">Sign In</ion-button>
-      
+        <ion-button expand="block" class="signup" type="submit" [disabled]="!signInForm.controls.email.valid || !signInForm.controls.password.valid">
+        Sign In
+      </ion-button>
+      </form>
       
       <ion-item>
-        <p>Don't have an account? <a  routerLink="/home">Sign Up</a></p>
+        <p>Don't have an account? <a routerLink="/home">Sign Up</a></p>
       </ion-item>
     </ion-list>
 </ion-content>

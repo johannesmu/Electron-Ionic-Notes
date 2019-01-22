@@ -16,20 +16,25 @@
           <h1>Sign Up</h1>
         </ion-label>
       </ion-list-header>
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input type="email" placeholder="you@domain.com"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Password</ion-label>
-        <ion-input type="password" placeholder="minimum 6 characters"></ion-input>
-      </ion-item>
+
+      <form [formGroup]="signUpForm" (submit)="signUp(signUpForm.value)">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" placeholder="you@domain.com" name="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Password</ion-label>
+          <ion-input type="password" placeholder="minimum 6 characters" name="password" formControlName="password" ></ion-input>
+        </ion-item>
       
-        <ion-button expand="block" class="signup">Sign Up</ion-button>
-      
+        <ion-button expand="block" class="signup" type="submit" 
+        [disabled]="!signUpForm.controls.email.valid || !signUpForm.controls.password.valid">
+          Sign Up
+        </ion-button>
+      </form>
       
       <ion-item>
-        <p>Already have an account? <a (click)="goToLogin()" routerLink="/login">Sign In</a></p>
+        <p>Already have an account? <a routerLink="/login">Sign In</a></p>
       </ion-item>
     </ion-list>
 </ion-content>
