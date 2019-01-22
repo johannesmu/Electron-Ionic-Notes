@@ -49,4 +49,10 @@ export class AuthenticationService {
       return { success: false, error: error.message };
     }
   }
+
+  async signOut(){
+    try{
+      
+    }
+  }
 }
