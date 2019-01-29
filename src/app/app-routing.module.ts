@@ -28,7 +28,8 @@ const routes: Routes = [
     path: 'signout', 
     loadChildren: './signout/signout.module#SignoutPageModule' 
   },  { path: 'notes', loadChildren: './notes/notes.module#NotesPageModule' },
-  { path: 'note-add', loadChildren: './note-add/note-add.module#NoteAddPageModule' }
+  { path: 'note-add', loadChildren: './note-add/note-add.module#NoteAddPageModule' },
+  { path: 'notes-edit', loadChildren: './notes-edit/notes-edit.module#NotesEditPageModule' }
 
 ];
 

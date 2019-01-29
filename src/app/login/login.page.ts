@@ -3,6 +3,7 @@ import { AuthenticationService } from '../authentication.service';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
     private authService:AuthenticationService,
     private formBuilder:FormBuilder,
     private toaster:ToastController,
-    private router:Router
+    private router:Router,
+    private dataService:DataService
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class LoginPage implements OnInit {
         //show toast
         this.showToast('Welcome Back!')
         .then( () => {
+          this.dataService.setUid( response.uid );
           //take user to notes
           this.router.navigate(['/notes']);
         });

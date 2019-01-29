@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { NoteAddPageModule } from '../app/note-add/note-add.module';
+import { NotesEditPageModule } from '../app/notes-edit/notes-edit.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,8 @@ import { NoteAddPageModule } from '../app/note-add/note-add.module';
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
     ReactiveFormsModule,
-    NoteAddPageModule
+    NoteAddPageModule,
+    NotesEditPageModule
   ],
   providers: [
     StatusBar,

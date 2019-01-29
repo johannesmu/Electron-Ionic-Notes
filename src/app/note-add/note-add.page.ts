@@ -16,7 +16,8 @@ export class NoteAddPage implements OnInit {
   ngOnInit() {
   }
   saveNote(){
-    let note = { title: this.title, content: this.content };
+    let now = new Date().getTime();
+    let note = { title: this.title, content: this.content, date: now };
     this.modalController.dismiss({ save: true, note: note });
   }
   close(){
