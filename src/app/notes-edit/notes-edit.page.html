@@ -10,10 +10,16 @@
         <ion-input type="text" [(ngModel)]="title" placeholder="Note title"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-textarea [(ngModel)]="content" rows="4" cols="20" placeholder="Note Content"></ion-textarea>
+        <ion-textarea [(ngModel)]="content" rows="4" cols="30" placeholder="Note Content"></ion-textarea>
       </ion-item>
-      <ion-button expand="block" (click)="saveNote()">Save</ion-button>
-      <ion-button expand="block" (click)="close()">Cancel</ion-button>
+      
     </ion-list>
   </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button slot="end" (click)="saveNote()">Save</ion-button>
+      <ion-button slot="start" (click)="close()">Cancel</ion-button>
+    </ion-toolbar>
+  </ion-footer>
   
