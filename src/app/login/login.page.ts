@@ -40,17 +40,19 @@ export class LoginPage implements OnInit {
           this.router.navigate(['/notes']);
         });
       }
+      else{
+        throw response.error;
+      }
     })
     .catch( (error) =>{
-      //error signing in
-      console.log(error);
+      this.showToast(error);
     });
   }
 
   async showToast(msg){
     const toast = await this.toaster.create({
       message: msg,
-      duration: 2000
+      duration: 4000
     });
     toast.present();
   }

@@ -24,8 +24,7 @@ export class AuthenticationService {
   }
 
   handleSignUpError( error ){
-    let message = error.message;
-    console.log(message);
+    let message = error.code;
     switch( message ){
       case 'auth/email-already-in-use' :
         return 'email already used';
@@ -47,10 +46,26 @@ export class AuthenticationService {
       return { success: true, uid: this.uid, email: email };
     }
     catch(error){
-      return { success: false, error: error.message };
+      return { success: false, error: this.handleSignInError(error) };
     }
   }
 
+  handleSignInError( error ){
+    console.log(error);
+    let message = error.code;
+    switch( message ){
+      case 'auth/expired-action-code':
+        return 'email link expired';
+      case 'auth/invalid-email' :
+        return 'please use a valid email address';
+      case 'auth/user-disabled' :
+        return 'account has been disabled';
+      case 'auth/wrong-password':
+        return 'wrong password';
+      default:
+        return null;
+    }
+  }
   async signOut(){
     try{
       await this.afAuth.auth.signOut();

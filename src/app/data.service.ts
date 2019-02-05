@@ -61,4 +61,9 @@ export class DataService {
     await dbRef.update( note.key, {title: note.title, date: note.date, content: note.content});
     return { success: true };
   }
+
+  async deleteNote( key:string ){
+    const path = `notes/${this.uid}`;
+    const dbRef = this.afDb.list( path );
+  }
 }
