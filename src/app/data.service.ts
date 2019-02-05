@@ -62,4 +62,8 @@ export class DataService {
     return { success: true };
   }
 
+  async deleteNote( key:string ){
+    const path = `notes/${this.uid}`;
+    const dbRef = this.afDb.list( path );
+  }
 }
