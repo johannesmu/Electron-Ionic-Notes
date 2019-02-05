@@ -5,21 +5,30 @@
   </ion-header>
   
   <ion-content padding>
-    <ion-list>
-      <ion-item>
-        <ion-input type="text" [(ngModel)]="title" placeholder="Note title"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-textarea [(ngModel)]="content" rows="4" cols="30" placeholder="Note Content"></ion-textarea>
-      </ion-item>
-      
-    </ion-list>
+    <form id="noteForm" [formGroup]="noteForm">
+      <ion-list>
+        <ion-item>
+          <ion-input type="text" placeholder="Note title" formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea rows="4" cols="30" placeholder="Note Content" formControlName="content"></ion-textarea>
+        </ion-item>  
+      </ion-list>
+    </form>
   </ion-content>
 
   <ion-footer>
     <ion-toolbar>
-      <ion-button slot="end" (click)="saveNote()">Save</ion-button>
-      <ion-button slot="start" (click)="close()">Cancel</ion-button>
+      <ion-buttons>
+        <ion-button slot="primary" (click)="close()">
+          <ion-icon name="undo" slot="start"></ion-icon>
+          Cancel
+        </ion-button>
+        <ion-button slot="secondary" (click)="saveNote()">
+          <ion-icon name="save" slot="start"></ion-icon>
+          Save
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-footer>
   

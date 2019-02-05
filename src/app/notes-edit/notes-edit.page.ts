@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, NavParams } from '@ionic/angular';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-notes-edit',
@@ -7,13 +8,18 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./notes-edit.page.scss'],
 })
 export class NotesEditPage implements OnInit {
-  title: string;
+  @Input() title: string;
   content: string;
   date: number;
   key: string;
-  constructor( private modalController:ModalController ) { }
+  noteForm: FormGroup;
+  constructor( private modalController:ModalController, private navParams:NavParams, private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
+    this.noteForm = this.formBuilder.group({
+      title: '',
+      content: ''
+    });
   }
   close(){
     this.modalController.dismiss({ save: false });
