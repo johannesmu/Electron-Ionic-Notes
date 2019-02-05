@@ -21,14 +21,14 @@
         <ion-card (click) = "editNote({title: note.title, content: note.content, date: note.date, key: note.key })">
           <ion-card-header>
             <ion-card-title>
-              {{note.title}}
+              {{truncateString( note.title, 10) }}
             </ion-card-title>
             <ion-card-subtitle>
-              {{note.date}}
+              {{formatDate( note.date) }}
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            {{note.content}}
+            {{ truncateString( note.content, 15) }}
           </ion-card-content>
         </ion-card>
       </ion-col>
