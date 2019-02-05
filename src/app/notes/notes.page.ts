@@ -19,7 +19,9 @@ export class NotesPage implements OnInit {
   ngOnInit() {
     this.getNotes();
   }
-  
+  ionViewDidEnter(){
+    this.getNotes();
+  }
   async createNote(){
     const modal = await this.modalController.create({
       component: NoteAddPage,
@@ -62,5 +64,53 @@ export class NotesPage implements OnInit {
       }
     });
     await modal.present();
+  }
+
+  formatDate(timestamp:number){
+    let dateObj = new Date( timestamp );
+    //get the name of the day returns 0 for sunday, 1 for monday
+    let day = dateObj.getDay();
+    //get the date
+    let date = dateObj.getDate();
+    //get the month
+    let month = dateObj.getMonth()+1;
+    //get the year
+    let year = dateObj.getFullYear();
+
+    //convert day to day name
+    let dayName:string = '';
+    switch( day ){
+      case 0:
+        dayName = 'Sunday';
+        break;
+      case 1:
+        dayName = 'Monday';
+        break;
+      case 2:
+        dayName = 'Tuesday';
+        break;
+      case 3:
+        dayName = 'Wednesday';
+        break;
+      case 4:
+        dayName = 'Thursday';
+        break;
+      case 5:
+        dayName = 'Friday';
+        break;
+      case 6:
+        dayName = 'Saturday';
+        break;
+    }
+    return `${dayName} ${date}/${month}/${year}`;
+  }
+
+  truncateString( str:string , charNumbers:number ){
+    let result:Array<string> = [];
+    let chars = str.split('');
+    for( let i=0; i<charNumbers; i++ ){
+      result.push( chars[i] );
+    }
+    return result.join('') + '...';
   }
 }
