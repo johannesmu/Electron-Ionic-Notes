@@ -28,7 +28,6 @@ export class NotesPage implements OnInit {
       componentProps: {}
     });
     modal.onDidDismiss().then( (response) => {
-      console.log(response);
       if( response.data.save == true ){
         //save data to firebase
         this.dataService.writeData( response.data.note );
@@ -58,7 +57,6 @@ export class NotesPage implements OnInit {
     modal.onDidDismiss().then( (response) => {
       if( response.data.save == true ){
         //save data to firebase with key of the note
-        console.log(response.data.note);
         this.dataService.updateNote( response.data.note )
         .then( (response) => { console.log(response) });
       }
