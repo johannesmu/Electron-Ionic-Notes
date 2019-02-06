@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   uid:string;
+  items:Observable<any[]>;
+  sub:Subject<boolean>;
   constructor(
     private afAuth:AngularFireAuth,
     private afDb:AngularFireDatabase
@@ -22,6 +25,7 @@ export class DataService {
         }
       }
     );
+    this.sub = new Subject();
   }
 
   async writeData(data){
@@ -47,12 +51,15 @@ export class DataService {
   }
 
   readData(){
-    const path = `notes/${this.uid}`;
-    const itemRef = this.afDb.list(path);
-    let items = itemRef.snapshotChanges().pipe(
-      map( changes => changes.map( value => ({key: value.payload.key, ...value.payload.val()}) ) )
-    );
-    return items;
+    const path:string = `notes/${this.uid}`;
+    const listRef = this.afDb.list(path);
+    this.items = listRef.snapshotChanges()
+    .pipe( map( 
+      changes =>  changes.map( value =>  ({key: value.payload.key, ...value.payload.val()}) ) 
+      )
+    )
+    .pipe( takeUntil(this.sub));
+    return this.items;
   }
 
   async updateNote( note ){
@@ -65,5 +72,9 @@ export class DataService {
   async deleteNote( key:string ){
     const path = `notes/${this.uid}`;
     const dbRef = this.afDb.list( path );
+  }
+  async stopObservation(){
+    await this.sub.next(true);
+    await this.sub.complete();
   }
 }

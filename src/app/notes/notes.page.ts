@@ -3,6 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { NoteAddPage } from '../note-add/note-add.page';
 import { DataService } from '../data.service';
 import { NotesEditPage } from '../notes-edit/notes-edit.page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notes',
@@ -11,6 +12,7 @@ import { NotesEditPage } from '../notes-edit/notes-edit.page';
 })
 export class NotesPage implements OnInit {
   notes:Array<any> = [];
+  noteSub:Subscription;
   constructor(
     private modalController:ModalController,
     private dataService:DataService
@@ -18,6 +20,12 @@ export class NotesPage implements OnInit {
 
   ngOnInit() {
     this.getNotes();
+  }
+  ngOnDestroy(){
+    if( this.noteSub ){
+      this.noteSub.unsubscribe();
+    }
+    console.log(this.noteSub);
   }
   ionViewDidEnter(){
     this.getNotes();
@@ -37,7 +45,7 @@ export class NotesPage implements OnInit {
   }
 
   getNotes(){
-    this.dataService.readData().subscribe( (response) => {
+    this.noteSub = this.dataService.readData().subscribe( (response) => {
       this.notes = response;
       this.sortNotes();
     });
@@ -56,7 +64,6 @@ export class NotesPage implements OnInit {
     });
     modal.onDidDismiss().then( (response) => {
       if( response.data.save == true ){
-        //save data to firebase with key of the note
         this.dataService.updateNote( response.data.note )
         .then( (response) => { console.log(response) });
       }
@@ -79,25 +86,25 @@ export class NotesPage implements OnInit {
     let dayName:string = '';
     switch( day ){
       case 0:
-        dayName = 'Sunday';
+        dayName = 'Su';
         break;
       case 1:
-        dayName = 'Monday';
+        dayName = 'Mo';
         break;
       case 2:
-        dayName = 'Tuesday';
+        dayName = 'Tu';
         break;
       case 3:
-        dayName = 'Wednesday';
+        dayName = 'We';
         break;
       case 4:
-        dayName = 'Thursday';
+        dayName = 'Th';
         break;
       case 5:
-        dayName = 'Friday';
+        dayName = 'Fr';
         break;
       case 6:
-        dayName = 'Saturday';
+        dayName = 'Sa';
         break;
     }
     return `${dayName} ${date}/${month}/${year}`;
@@ -109,6 +116,7 @@ export class NotesPage implements OnInit {
     for( let i=0; i<charNumbers; i++ ){
       result.push( chars[i] );
     }
-    return result.join('') + '...';
+    let elipsis:string = (result.length < str.length) ? '...' : '';
+    return result.join('') + elipsis;
   }
 }

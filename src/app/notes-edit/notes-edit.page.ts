@@ -9,23 +9,24 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 })
 export class NotesEditPage implements OnInit {
   @Input() title: string;
-  content: string;
-  date: number;
-  key: string;
+  @Input() content: string;
+  @Input() date: number;
+  @Input() key: string;
   noteForm: FormGroup;
   constructor( private modalController:ModalController, private navParams:NavParams, private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
     this.noteForm = this.formBuilder.group({
-      title: '',
-      content: ''
+      title: new FormControl(this.title),
+      content: new FormControl(this.content)
     });
   }
   close(){
     this.modalController.dismiss({ save: false });
   }
-  saveNote(){
-    let note = {title: this.title, content:this.content, date:this.date, key: this.key };
+  saveNote(formData){
+    let note = {title: formData.title, content:formData.content, date:this.date, key: this.key };
+    console.log(note);
     this.modalController.dismiss({ save: true, note: note });
   }
 }

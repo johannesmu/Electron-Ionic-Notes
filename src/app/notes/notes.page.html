@@ -11,9 +11,21 @@
 
 <ion-content padding>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="createNote()">
+    <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
+      <ion-fab-list side="bottom">
+        <ion-fab-button (click)="createNote()">
+          <ion-icon name="filing"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="pricetag"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    
   </ion-fab>
   <ion-grid>
     <ion-row>
@@ -28,7 +40,7 @@
             </ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            {{ truncateString( note.content, 15) }}
+            {{ truncateString( note.content, 20) }}
           </ion-card-content>
         </ion-card>
       </ion-col>

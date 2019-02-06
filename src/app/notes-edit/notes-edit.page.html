@@ -20,14 +20,15 @@
   <ion-footer>
     <ion-toolbar>
       <ion-buttons>
-        <ion-button slot="primary" (click)="close()">
+        <ion-button slot="start" (click)="close()">
           <ion-icon name="undo" slot="start"></ion-icon>
           Cancel
         </ion-button>
-        <ion-button slot="secondary" (click)="saveNote()">
+      
+        <ion-button slot="end" (click)="saveNote(noteForm.value)">
           <ion-icon name="save" slot="start"></ion-icon>
           Save
-        </ion-button>
+        </ion-button> 
       </ion-buttons>
     </ion-toolbar>
   </ion-footer>
