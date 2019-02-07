@@ -70,7 +70,7 @@ app.on('activate', function () {
   }
 })
 ```
-## add to the package.json in project root directory
+## Add to the package.json in project root directory
 ```
 {
   "name": "my-electron-app",
@@ -90,3 +90,15 @@ app.on('activate', function () {
   // the other stuff in package.json
 }
 ```
+## Run the app
+Run the app using
+```
+npm run electron
+```
+Build the Ionic project and run electron
+```
+npm run electron-build
+```
+
+# Problems
+The Electron app does not auto reload when you change the ionic and angular code (unlike when using `ionic serve` command).
